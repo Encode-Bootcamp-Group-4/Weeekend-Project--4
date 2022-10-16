@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ethers } from 'ethers';
+import { WalletConnectComponent } from '../wallet-connect/wallet-connect.component';
 
 @Component({
   selector: 'app-voting',
@@ -7,6 +8,11 @@ import { ethers } from 'ethers';
   styleUrls: ['./voting.component.scss'],
 })
 export class VotingComponent implements OnInit {
+  @Input() walletConnected: boolean = false;
+  @Input() walletId: string = '';
+
+  constructor() {}
+
   ngOnInit(): void {}
 
   vote(proposal: number) {
