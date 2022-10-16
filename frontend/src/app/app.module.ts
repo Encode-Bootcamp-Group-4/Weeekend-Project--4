@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { VotingComponent } from './voting/voting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WalletConnectComponent } from './wallet-connect/wallet-connect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VotingComponent
+    VotingComponent,
+    WalletConnectComponent
   ],
   imports: [
     BrowserModule,
