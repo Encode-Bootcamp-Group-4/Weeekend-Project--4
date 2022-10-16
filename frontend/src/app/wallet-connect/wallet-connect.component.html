@@ -1,11 +1,5 @@
 <div>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-4 col-md-8 mx-auto">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h2 class="card-title">Wallet Connect</h2>
-                        <p class="card-text">Click below to go to connect wallet.</p>
+    <section class="py-1 text-right container">
                         <button
                             *ngIf="!walletConnected" 
                             class="btn btn-primary" 
@@ -15,16 +9,9 @@
                         <button
                             *ngIf="walletConnected" 
                             class="btn btn-primary"
-                            routerLink="/voting"
                         >
-                        Continue to Dashboard
+                        {{walletId}}
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </section>
 </div>
-<app-voting [walletConnected]="this.walletConnected"></app-voting>
-<app-voting [walletId]="this.walletId"></app-voting>
+<app-voting [walletConnected]="this.walletConnected" [walletId]="this.walletId"></app-voting>

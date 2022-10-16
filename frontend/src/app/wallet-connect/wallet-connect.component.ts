@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./wallet-connect.component.scss'],
 })
 export class WalletConnectComponent {
-  currentBeverage = 'coffee';
   public walletConnected: boolean = false;
   public walletId: string = '';
 
@@ -24,11 +23,9 @@ export class WalletConnectComponent {
     if (accounts.length > 0) {
       this.walletConnected = true;
       this.walletId = accounts[0];
-      this.router.navigate(['/voting']);
     } else {
       this.walletConnected = false;
       this.walletId = '';
-      this.router.navigate(['']);
     }
   };
 }
