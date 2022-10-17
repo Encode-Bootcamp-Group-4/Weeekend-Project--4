@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WalletService } from '../services/wallet.service';
 import { ethers } from 'ethers';
 import { WalletConnectComponent } from '../wallet-connect/wallet-connect.component';
 
@@ -8,14 +9,27 @@ import { WalletConnectComponent } from '../wallet-connect/wallet-connect.compone
   styleUrls: ['./voting.component.scss'],
 })
 export class VotingComponent implements OnInit {
-  @Input() walletConnected: boolean = false;
-  @Input() walletId: string = '';
+  walletId: string = '';
+  provider: any;
+  signer: any;
+  public ethereum;
 
-  constructor() {}
+  constructor(private walletService: WalletService) {
+    this.ethereum = (window as any).ethereum;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.walletService
+      .checkWalletConnected()
+      .then((accounts) => (this.walletId = accounts[0]));
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.provider.getSigner();
+  }
 
-  vote(proposal: number) {
+  async vote(proposal: number) {
+    const pepe = await this.provider.getBlockNumber();
+    console.log(pepe);
+    console.log(this.walletId);
     console.log(proposal);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { WalletService } from '../services/wallet.service';
 import { Router } from '@angular/router';
 
@@ -26,6 +26,7 @@ export class WalletConnectComponent {
     } else {
       this.walletConnected = false;
       this.walletId = '';
+      this.router.navigate(['']);
     }
   };
 }

@@ -1,17 +1,17 @@
 <div>
     <section class="py-1 text-right container">
-                        <button
-                            *ngIf="!walletConnected" 
-                            class="btn btn-primary" 
-                            (click)="connectToWallet()">
-                            Connect Wallet
-                        </button>
-                        <button
-                            *ngIf="walletConnected" 
-                            class="btn btn-primary"
-                        >
-                        {{walletId}}
-                        </button>
+      <button
+          *ngIf="!walletConnected" 
+          class="btn btn-primary" 
+          (click)="connectToWallet()">
+          Connect Wallet
+      </button>
+      <!-- <button
+          *ngIf="walletConnected" 
+          class="btn btn-primary"
+      >
+      Continue to Dashboard
+      </button> -->
     </section>
 </div>
 <app-voting [walletConnected]="this.walletConnected" [walletId]="this.walletId"></app-voting>
