@@ -89,22 +89,26 @@
       </div>
     </div>
   </section>
-  <section class="py-1 text-center container">
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-          <input type="text" id="delegate" placeholder="Address to delegate 1 token to" [formControl]="_delegate"/>
+        <p>
+          <input type="text" class="form-control" id="delegate" placeholder="Delegatee" [formControl]="_delegate"/>
           <button class="btn btn-primary my-2" value="submit" type="submit" (click)="delegate(_delegate.value)">Delegate 1 Token</button>
+        </p>
       </div>
+    </div>
   </section>
-  
+          
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 1</text></svg>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 0</text></svg>
 
             <div class="card-body">
-              <p class="card-text">Proposal description</p>
+              <p class="card-text">Ducks</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" (click)="vote(0)" class="btn btn-sm btn-outline-secondary">Vote</button>
@@ -115,10 +119,10 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 2</text></svg>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 1</text></svg>
 
             <div class="card-body">
-              <p class="card-text">Proposal description</p>
+              <p class="card-text">Geese</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" (click)="vote(1)" class="btn btn-sm btn-outline-secondary">Vote</button>
@@ -129,10 +133,10 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 3</text></svg>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proposal 2</text></svg>
 
             <div class="card-body">
-              <p class="card-text">Proposal description</p>
+              <p class="card-text">Swans</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" (click)="vote(2)" class="btn btn-sm btn-outline-secondary">Vote</button>

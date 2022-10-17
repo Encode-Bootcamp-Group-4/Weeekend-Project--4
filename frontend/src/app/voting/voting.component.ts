@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WalletService } from '../services/wallet.service';
 import { ethers } from 'ethers';
+import web3 from 'web3';
 import { MYTOKEN_ABI } from "../../assets/MyToken";
 import { TOKENIZEDBALLOT_ABI } from "../../assets/TokenizedBallot";
 import { WalletConnectComponent } from '../wallet-connect/wallet-connect.component';
 
 const MYTOKEN_ADDRESS = '0x4F4d6E7DD2Ad4F94338E2FcDE3d09c76F9F83945';
-const TOKENIZEDBALLOT_ADDRESS = '0x8A5E23B3aeB923B0999E4E0162BF0886e01cfabd';
+const TOKENIZEDBALLOT_ADDRESS = '0x151427884B81dF42f8C8832A21E7Aa2D1CcF5fd3';
 const myTokenAbi = MYTOKEN_ABI;
 const tokenizedBallotAbi = TOKENIZEDBALLOT_ABI;
 
@@ -66,6 +67,8 @@ export class VotingComponent implements OnInit {
     const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
     const winningProposal = await TokenizedBallotContract['winningProposal']();
     console.log(winningProposal);
+    window.alert(`The winning proposal is ${winningProposal}`);
+    this.getWinningProposalName();
   }
 
   async getWinningProposalName() {
@@ -74,5 +77,6 @@ export class VotingComponent implements OnInit {
     const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
     const winningProposalName = await TokenizedBallotContract['winnerName']();
     console.log(winningProposalName);
+    window.alert(`Winner name: ${web3.utils.hexToUtf8(winningProposalName)}`)
   }
 }
