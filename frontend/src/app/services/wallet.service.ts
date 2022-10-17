@@ -31,23 +31,4 @@ export class WalletService {
       throw new Error('Error getting accounts from Metamask');
     }
   };
-
-  public getProvider = async () => {
-    try {
-      const provider = new ethers.providers.Web3Provider(this.ethereum);
-      return provider;
-    } catch (e) {
-      throw new Error('cannot get signer');
-    }
-  };
-
-  public getWeb3Signer = async () => {
-    try {
-      const provider = await this.getProvider();
-      const signer = provider.getSigner();
-      return signer;
-    } catch (e) {
-      throw new Error('cannot get signer');
-    }
-  };
 }

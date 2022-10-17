@@ -9,18 +9,25 @@ import { ethers } from 'ethers';
 })
 export class VotingComponent implements OnInit {
   walletId: string = '';
+  provider: any;
   signer: any;
+  public ethereum;
 
-  constructor(private walletService: WalletService) {}
+  constructor(private walletService: WalletService) {
+    this.ethereum = (window as any).ethereum;
+  }
 
   ngOnInit(): void {
     this.walletService
       .checkWalletConnected()
       .then((accounts) => (this.walletId = accounts[0]));
-    this.signer = this.walletService.getWeb3Signer();
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.provider.getSigner();
   }
 
-  vote(proposal: number) {
+  async vote(proposal: number) {
+    const pepe = await this.provider.getBlockNumber();
+    console.log(pepe);
     console.log(this.walletId);
     console.log(proposal);
   }
