@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WalletService } from '../services/wallet.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './wallet-connect.component.html',
   styleUrls: ['./wallet-connect.component.scss'],
 })
-export class WalletConnectComponent implements OnInit {
+export class WalletConnectComponent {
   public walletConnected: boolean = false;
   public walletId: string = '';
 
@@ -27,10 +27,7 @@ export class WalletConnectComponent implements OnInit {
     } else {
       this.walletConnected = false;
       this.walletId = '';
+      this.router.navigate(['']);
     }
   };
-
-  ngOnInit(): void {
-    // this.connectToWallet();
-  }
 }
