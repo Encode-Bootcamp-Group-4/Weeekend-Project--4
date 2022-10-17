@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { WalletService } from '../services/wallet.service';
 import { ethers } from 'ethers';
 import { MYTOKEN_ABI } from "../../assets/MyToken";
@@ -16,6 +16,7 @@ const tokenizedBallotAbi = TOKENIZEDBALLOT_ABI;
   templateUrl: './voting.component.html',
   styleUrls: ['./voting.component.scss'],
 })
+
 export class VotingComponent implements OnInit {
   walletId: string = '';
   provider: any;
@@ -31,30 +32,47 @@ export class VotingComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletService
-      .checkWalletConnected()
-      .then((accounts) => (this.walletId = accounts[0]));
+    .checkWalletConnected()
+    .then((accounts) => (this.walletId = accounts[0]));
+  }
+
+  async requestTokens () {
+    throw new Error('Not implemented');
+  }
+
+  _delegate = new FormControl('');
+
+  async delegate (delegateAddress: any) {
     this.provider = new ethers.providers.Web3Provider(this.ethereum);
     this.signer = this.provider.getSigner();
     const MyTokenContract = new ethers.Contract(MYTOKEN_ADDRESS, myTokenAbi.abi, this.signer);
-    const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
-    // console.log(MyTokenContract);
-    console.log(TokenizedBallotContract);
-  }
-
-  async delegate (delegateAddress: string) {
-    console.log(delegateAddress);
+    const delegateTx = await MyTokenContract['delegate'](delegateAddress);
+    await delegateTx.wait();
+    console.log("Delegated!");
   };
 
   async vote(proposal: number) {
     this.provider = new ethers.providers.Web3Provider(this.ethereum);
     this.signer = this.provider.getSigner();
     const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
-    // const pepe = await this.provider.getBlockNumber();
-    // console.log(pepe);
-    // console.log(this.walletId);
-    // console.log(proposal);
     const voteTx = await TokenizedBallotContract['vote'](proposal, ethers.utils.parseEther("1"));
     await voteTx.wait();
     console.log("Voted!");
+  }
+
+  async getWinningProposal() {
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.provider.getSigner();
+    const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
+    const winningProposal = await TokenizedBallotContract['winningProposal']();
+    console.log(winningProposal);
+  }
+
+  async getWinningProposalName() {
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.provider.getSigner();
+    const TokenizedBallotContract = new ethers.Contract(TOKENIZEDBALLOT_ADDRESS, tokenizedBallotAbi.abi, this.signer);
+    const winningProposalName = await TokenizedBallotContract['winnerName']();
+    console.log(winningProposalName);
   }
 }
