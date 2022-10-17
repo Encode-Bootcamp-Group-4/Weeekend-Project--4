@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '../services/wallet.service';
 import { ethers } from 'ethers';
+import { WalletConnectComponent } from '../wallet-connect/wallet-connect.component';
 
 @Component({
   selector: 'app-voting',
