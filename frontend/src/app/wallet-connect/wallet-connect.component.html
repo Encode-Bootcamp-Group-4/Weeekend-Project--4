@@ -1,17 +1,20 @@
 <div>
-    <section class="py-1 text-right container">
-      <button
-          *ngIf="!walletConnected" 
-          class="btn btn-primary" 
-          (click)="connectToWallet()">
-          Connect Wallet
-      </button>
-      <!-- <button
-          *ngIf="walletConnected" 
-          class="btn btn-primary"
-      >
-      Continue to Dashboard
-      </button> -->
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-4 col-md-8 mx-auto">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h2 class="card-title">Wallet Connect</h2>
+                        <p class="card-text">Click below to go to connect wallet.</p>
+                        <button
+                            *ngIf="!walletConnected" 
+                            class="btn btn-primary" 
+                            (click)="connectToWallet()">
+                            Connect Wallet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
-<app-voting [walletConnected]="this.walletConnected" [walletId]="this.walletId"></app-voting>

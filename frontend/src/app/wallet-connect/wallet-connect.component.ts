@@ -15,7 +15,6 @@ export class WalletConnectComponent {
 
   connectToWallet = async () => {
     this.walletService.connectWallet().then(() => this.checkWalletConnected());
-    // window.location.reload();
   };
 
   checkWalletConnected = async () => {
@@ -23,6 +22,7 @@ export class WalletConnectComponent {
     if (accounts.length > 0) {
       this.walletConnected = true;
       this.walletId = accounts[0];
+      this.router.navigate(['/voting']);
     } else {
       this.walletConnected = false;
       this.walletId = '';
