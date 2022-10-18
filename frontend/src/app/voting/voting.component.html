@@ -82,31 +82,10 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Vote on the proposals below!</h1>
-        <p>
-          <input type="number" class="form-control" min=0 max=100 placeholder="Amount of Tokens" [formControl]="_amount"/>
-          <button class="btn btn-primary my-2" (click)="requestTokens(_amount.value)">Request Voting Tokens</button>
-        </p>
-      </div>
-    </div>
-  </section>
-  
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <p>
-          <input type="text" class="form-control" id="delegate" placeholder="Delegatee address" [formControl]="_delegate"/>
-          <button class="btn btn-primary my-2" value="submit" type="submit" (click)="delegate(_delegate.value)">Delegate 1 Token</button>
-        </p>
       </div>
     </div>
   </section>
 
-  <section class="py-1 text-center container">
-    <div class="col-lg-6 col-md-8 mx-auto">
-        <button class="btn btn-primary my-2" value="submit" type="submit" (click)="getWinningProposal()">Query Results</button>
-    </div>
-  </section>
-          
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -156,6 +135,24 @@
     </div>
   </div>
 
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <p>
+          <input type="number" class="form-control" min=0 max=100 placeholder="Amount of Tokens" [formControl]="_amount"/>
+          <button class="btn btn-primary my-2" (click)="requestTokens(_amount.value)">Request Voting Tokens</button>
+        </p>
+        <p>
+          <input type="text" class="form-control" id="delegate" placeholder="Delegatee address" [formControl]="_delegate"/>
+          <button class="btn btn-primary my-2" value="submit" type="submit" (click)="delegate(_delegate.value)">Delegate 1 Token</button>
+        </p>
+        <p>
+          <button class="btn btn-primary my-2" value="submit" type="submit" (click)="getWinningProposal()">Query Results</button>
+        </p>
+      </div>
+    </div>
+  </section>
+        
   <section class="py-5 text-center container">
     <h2>Last 5 Votes</h2>
     <div class="table-responsive">
