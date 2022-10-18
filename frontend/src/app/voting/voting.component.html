@@ -89,6 +89,7 @@
       </div>
     </div>
   </section>
+  
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -97,6 +98,12 @@
           <button class="btn btn-primary my-2" value="submit" type="submit" (click)="delegate(_delegate.value)">Delegate 1 Token</button>
         </p>
       </div>
+    </div>
+  </section>
+
+  <section class="py-1 text-center container">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <button class="btn btn-primary my-2" value="submit" type="submit" (click)="getWinningProposal()">Query Results</button>
     </div>
   </section>
           
@@ -145,18 +152,9 @@
             </div>
           </div>
         </div>
-        
-        <button type="button" (click)="getVotingHistory()" class="btn btn-sm btn-outline-secondary">GET TRANSACTION HISTORY</button>
-
       </div>
     </div>
   </div>
-
-  <section class="py-1 text-center container">
-    <div class="col-lg-6 col-md-8 mx-auto">
-        <button class="btn btn-primary my-2" value="submit" type="submit" (click)="getWinningProposal()">Query Results</button>
-    </div>
-  </section>
 
   <section class="py-5 text-center container">
     <h2>Last 5 Votes</h2>
@@ -170,30 +168,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0x123...456</td>
-            <td>1</td>
-            <td>0x123...456</td>
-          </tr>
-          <tr>
-            <td>0x123...456</td>
-            <td>2</td>
-            <td>0x123...456</td>
-          </tr>
-          <tr>
-            <td>0x123...456</td>
-            <td>3</td>
-            <td>0x123...456</td>
-          </tr>
-          <tr>
-            <td>0x123...456</td>
-            <td>1</td>
-            <td>0x123...456</td>
-          </tr>
-          <tr>
-            <td>0x123...456</td>
-            <td>2</td>
-            <td>0x123...456</td>
+          <tr *ngFor="let vote of voteArr">
+            <td>{{vote.hash}}</td>
+            <td>{{vote.data}}</td>
+            <td>{{vote.from}}</td>
           </tr>
         </tbody>
       </table>

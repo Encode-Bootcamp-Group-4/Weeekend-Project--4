@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WalletService } from '../services/wallet.service';
-import { Contract, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import web3 from 'web3';
 import { MYTOKEN_ABI } from "../../assets/MyToken";
 import { TOKENIZEDBALLOT_ABI } from "../../assets/TokenizedBallot";
@@ -26,22 +26,33 @@ export class VotingComponent implements OnInit {
   myTokenAbi: any;
   MyTokenContract: any;
   tokenContractAddress: any;
-  TokenizedBallotContract: any; 
+  TokenizedBallotContract: any;
+  voteArr: any;
   public ethereum;
 
   constructor(private walletService: WalletService, private apiService: ApiService) {
     this.ethereum = (window as any).ethereum;
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.provider.getSigner();
+    this.voteArr = [];
   }
 
   ngOnInit(): void {
-    // this.apiService.getContractAddress().subscribe((response) => {
-    //   this.tokenContractAddress = response.result;
-    // });
     this.apiService.postMintTokens
     this.walletService
     .checkWalletConnected()
     .then((accounts) => (this.walletId = accounts[0]));
-
+    let etherscanProvider = new ethers.providers.EtherscanProvider(
+      5,
+      'E416Z7BKQ1GSW2J3Q9K6YHW2DYPHGZ97N8'
+    );
+    etherscanProvider.getHistory(TOKENIZEDBALLOT_ADDRESS).then((history) => {
+      history.forEach((tx) => {
+        if (tx.data.length <= 138) {
+          this.voteArr.push({from: tx.from, hash: tx.hash, data: tx.data[73]});
+        }
+      });
+    });
   }
 
   getContractAddress() {
@@ -51,11 +62,7 @@ export class VotingComponent implements OnInit {
   _amount = new FormControl(0);
 
   async requestTokens (amt: any) {
-    console.log(amt);
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.provider.getSigner();
     let user = await this.signer.getAddress();
-    // console.log(this.user);
     this.apiService.postMintTokens(user, amt).subscribe((response) => {
       console.log(response);
     });
@@ -66,8 +73,6 @@ export class VotingComponent implements OnInit {
   _delegate = new FormControl('');
 
   async delegate(delegateAddress: any) {
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.provider.getSigner();
     const MyTokenContract = new ethers.Contract(
       MYTOKEN_ADDRESS,
       myTokenAbi.abi,
@@ -80,8 +85,6 @@ export class VotingComponent implements OnInit {
   };
 
   async vote(proposal: number) {
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.provider.getSigner();
     const TokenizedBallotContract = new ethers.Contract(
       TOKENIZEDBALLOT_ADDRESS,
       tokenizedBallotAbi.abi,
@@ -97,8 +100,6 @@ export class VotingComponent implements OnInit {
   }
 
   async getWinningProposal() {
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.provider.getSigner();
     const TokenizedBallotContract = new ethers.Contract(
       TOKENIZEDBALLOT_ADDRESS,
       tokenizedBallotAbi.abi,
@@ -111,7 +112,6 @@ export class VotingComponent implements OnInit {
   }
 
   async getWinningProposalName() {
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
     const TokenizedBallotContract = new ethers.Contract(
       TOKENIZEDBALLOT_ADDRESS,
       tokenizedBallotAbi.abi,
@@ -122,23 +122,4 @@ export class VotingComponent implements OnInit {
     window.alert(`Winner name: ${web3.utils.hexToUtf8(winningProposalName)}`);
   }
 
-  async getVotingHistory() {
-    let etherscanProvider = new ethers.providers.EtherscanProvider(
-      5,
-      'E416Z7BKQ1GSW2J3Q9K6YHW2DYPHGZ97N8'
-    );
-    const TokenizedBallotContract = new ethers.Contract(
-      TOKENIZEDBALLOT_ADDRESS,
-      tokenizedBallotAbi.abi,
-      this.signer
-    );
-    etherscanProvider.getHistory(TOKENIZEDBALLOT_ADDRESS).then((history) => {
-      history.forEach((tx) => {
-        if (tx.data.length <= 138) {
-          const pepe = [tx.from, tx.hash, tx.data[73]];
-          console.log(pepe);
-        }
-      });
-    });
-  }
 }
