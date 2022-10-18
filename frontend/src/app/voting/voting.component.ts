@@ -8,7 +8,7 @@ import { TOKENIZEDBALLOT_ABI } from "../../assets/TokenizedBallot";
 import { ApiService } from '../api.service';
 
 const MYTOKEN_ADDRESS = '0x4F4d6E7DD2Ad4F94338E2FcDE3d09c76F9F83945';
-const TOKENIZEDBALLOT_ADDRESS = '0x151427884B81dF42f8C8832A21E7Aa2D1CcF5fd3';
+const TOKENIZEDBALLOT_ADDRESS = '0xE00fe511fCD8Ba6C376E81B00f40FdA606bE5acb';
 const myTokenAbi = MYTOKEN_ABI;
 const tokenizedBallotAbi = TOKENIZEDBALLOT_ABI;
 
