@@ -48,26 +48,8 @@ export class AppService {
     return tx;
   }
 
-  async delegate (to: string) {
-    // delegate voting power here!
-    const tx = await this.myTokenSignedContract.delegate(
-      to
-    );
-    return tx;
-  }
-
-  async vote(proposal: number, amt: number) {
-    // vote here!
-    const tx = await this.tokenizedBallotSignedContract.vote(
-      proposal,
-      ethers.utils.parseEther(amt.toString())
-    );
-    return tx;
-  }
-
-  getVotePower(address: string) {
-    // get vote power here!
-    return this.tokenizedBallotSignedContract.votePower(address); // returns a BigNumber in hex format
-  }
+  getTokenAddress() {
+    return { result: MYTOKEN_ADDRESS };
+  };
 
 }

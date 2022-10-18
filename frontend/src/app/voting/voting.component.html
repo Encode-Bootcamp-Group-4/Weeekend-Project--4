@@ -83,8 +83,8 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Vote on the proposals below!</h1>
         <p>
-          <input type="text" class="form-control" placeholder="Amount of Tokens" />
-          <button class="btn btn-primary my-2">Request Voting Tokens</button>
+          <input type="number" class="form-control" min=0 max=100 placeholder="Amount of Tokens" [formControl]="_amount"/>
+          <button class="btn btn-primary my-2" (click)="requestTokens(_amount.value)">Request Voting Tokens</button>
         </p>
       </div>
     </div>
@@ -93,7 +93,7 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <p>
-          <input type="text" class="form-control" id="delegate" placeholder="Delegatee" [formControl]="_delegate"/>
+          <input type="text" class="form-control" id="delegate" placeholder="Delegatee address" [formControl]="_delegate"/>
           <button class="btn btn-primary my-2" value="submit" type="submit" (click)="delegate(_delegate.value)">Delegate 1 Token</button>
         </p>
       </div>
