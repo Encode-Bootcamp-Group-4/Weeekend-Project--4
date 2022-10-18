@@ -15,9 +15,16 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept, Authorization',
   };
   app.enableCors(corsOptions);
-  const config = new DocumentBuilder().build();
+
+  const config = new DocumentBuilder()
+  .setTitle('Week 4 Team 4 Encode')
+  .setDescription('API description for Week 4 Team 4 Encode')
+  .setVersion('1.0')
+  .addTag('week-4')
+  .build(); 
+
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('docs', app, document);
   await app.listen(3000);
 
   if (module.hot) {
